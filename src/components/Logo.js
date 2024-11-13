@@ -4,8 +4,10 @@ import  logo from './images/Logo.png'
 
 const Logo = () => {
     return(
-        <div className='pt-5 justify-content-center d-flex'>
-            <img src={logo} alt="" />
+        <div className='pt-5 pb-5 justify-content-center d-flex col-8 container-fluid '>
+
+            <img className='justify-content-center' src={logo} alt="" />
+
         </div>
     )
 }
