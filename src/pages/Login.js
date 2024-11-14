@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Logo from './Logo'
-import './styles.css'
+import Logo from '../components/Logo'
+import '../components/styles.css'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
 
-const App = () => {
+const Login = () => {
     return <div>
                 <Container>
                     <Row>
@@ -35,7 +36,9 @@ const App = () => {
                             </div>
                             <p className='justify-content-center d-flex font-weight-bold'>Nunca se cadastrou antes?</p>
                             <div className='d-flex justify-content-center mb-3'>
-                                <Button className='btn-primary'>Cadastro</Button>
+                                <Link to="/cadastro">
+                                    <Button className='btn-primary'>Cadastro</Button>
+                                </Link>
                             </div>
                         </div>
 
@@ -46,4 +49,4 @@ const App = () => {
             </div>
 }
 
-export default App;
+export default Login;
