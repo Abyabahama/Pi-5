@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 
-const Formulario = () => {
+const FormularioRPA = () => {
     return (
             <div>
                 <Tabs defaultActiveKey="Pessoal" id="uncontrolled-tab-example" className="mb-3">
@@ -93,35 +93,9 @@ const Formulario = () => {
                             <Form.Control type='linkedin'></Form.Control>
                         </Form.Group>
                     </Tab>
-                    <Tab eventKey="Empresarial" title="Empresarial">
-                        <Form.Group className='mb-1' controlId='nomeEmp.ControlInput'>
-                            <Form.Label>Nome da Empresa</Form.Label>
-                            <Form.Control type='nomeEmp'></Form.Control>
-                        </Form.Group>
-                        <Form.Group className='mb-1' controlId='cnpj.ControlInput'>
-                            <Form.Label>CNPJ da Empresa</Form.Label>
-                            <Form.Control type='cnpj'></Form.Control>
-                        </Form.Group>
-                        <Form.Group className='mb-1' controlId='cnae.ControlInput'>
-                            <Form.Label>CNAE da empresa ligado à educação</Form.Label>
-                            <Form.Control type='cnae'></Form.Control>
-                        </Form.Group>
-                        <Form.Group className='mb-1' controlId='nomeCont.ControlInput'>
-                            <Form.Label>Nome completo do responsável pela assinatura do contrato de prestação de serviços</Form.Label>
-                            <Form.Control type='nome'></Form.Control>
-                        </Form.Group>
-                        <Form.Group className='mb-1' controlId='emailCont.ControlInput'>
-                            <Form.Label>E-mail do responsável pela assinatura do contrato de prestação de serviços</Form.Label>
-                            <Form.Control type='email'></Form.Control>
-                        </Form.Group>
-                        <Form.Group className='mb-1' controlId='cpfCont.ControlInput'>
-                            <Form.Label>CPF do responsável pela assinatura do contrato de prestação de serviços</Form.Label>
-                            <Form.Control type='cpf'></Form.Control>
-                        </Form.Group>
-                    </Tab>
                 </Tabs>
             </div>
     )
 }
 
-export default Formulario;
+export default FormularioRPA;
