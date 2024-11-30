@@ -33,10 +33,15 @@ const Login = () => {
                                         <Form.Control type='rg'></Form.Control>
                                     </Form.Group>
                                 </Form>
+                                <div className='d-flex justify-content-center mb-3'>
+                                    <Link to="/atividades" className='text-decoration-none'>
+                                        <Button className='btn-primary'>Login</Button>
+                                    </Link>
+                                </div>
                             </div>
                             <p className='justify-content-center d-flex font-weight-bold'>Nunca se cadastrou antes?</p>
                             <div className='d-flex justify-content-center mb-3'>
-                                <Link to="/cadastro">
+                                <Link to="/cadastro" className='text-decoration-none'>
                                     <Button className='btn-primary'>Cadastro</Button>
                                 </Link>
                             </div>
