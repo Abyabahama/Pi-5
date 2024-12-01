@@ -14,6 +14,7 @@ const FormularioAtv = () => {
     const [field, setField] = useState([]);
     return (
             <div>
+                
                 <Tabs>
                     <Tab eventKey="geral" title="Informações Gerais">
                         <Form>
@@ -21,9 +22,9 @@ const FormularioAtv = () => {
                                 <Form.Label>Nome Sugerido da Atividade</Form.Label>
                                 <Form.Control type='name'></Form.Control>
                             </Form.Group>
-                            <Form.Group className='mb-1 mt-3' controlId='nome.ControlInput'>
-                                <Form.Label>Nome do Aplicador/Professor</Form.Label>
-                                <Form.Control type='name'></Form.Control>
+                            <Form.Group className='mb-1 mt-3' controlId='rg.ControlInput'>
+                                <Form.Label>RG do Aplicador/Professor</Form.Label>
+                                <Form.Control type='rg'></Form.Control>
                             </Form.Group>
                             <Form.Select className="mt-3">
                                 <option>Nome do responsavel de PAE em sua área (contato no IMT)</option>

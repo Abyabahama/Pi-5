@@ -28,9 +28,7 @@ const CadastroCNPJ = () => {
 
                             </div>
                             <div className='d-flex justify-content-center my-3'>
-                                <Link to="">
-                                    <Button className='btn-primary'>Enviar</Button>
-                                </Link>
+
                             </div>
                         </div>
 
