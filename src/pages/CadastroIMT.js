@@ -5,48 +5,33 @@ import Logo from '../components/Logo'
 import '../components/styles.css'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
-
+import {Link} from 'react-router-dom';
+import FormularioIMT from '../components/formularioIMT';
 
 const CadastroIMT = () => {
     return <div>
-                <Container>
-                    <Row>
-                        <Logo></Logo>
-                    </Row>
-                </Container>
-                <Container>
-                    <Row className='justify-content-center'>
-                        <div className='bg-white rounded mt-4 pt-3 mb-1 col-10'>
-                            <h3 className='justify-content-center d-flex mb-4 font-weight-bold'>Insira seu e-mail de contato e número de R.G</h3>
-                            <div>
-                            <Form>
-                                <Form.Group className='mb-1' controlId='login.ControlInput'>
-                                    <Form.Label>Endereço de E-mail</Form.Label>
-                                    <Form.Control type='email'></Form.Control>
-                                </Form.Group>
-                                <Form.Group className='mb-3' controlId='senha.ControlInput'>
-                                    <Form.Label>R.G</Form.Label>
-                                    <Form.Control type='rg'></Form.Control>
-                                </Form.Group>
-                            </Form>
+        <Container>
+            <Row>
+                <Logo></Logo>
+            </Row>
+        </Container>
+        <Container>
+            <Row className='justify-content-center'>
+                <div className='bg-white rounded mt-4 pt-3 mb-1 col-10'>
+                    <h3 className='justify-content-center d-flex mb-4 font-weight-bold'>Insira seu e-mail de contato e número de R.G</h3>
+                    <div>
+                        <FormularioIMT></FormularioIMT>
+                    </div>
 
-                            </div>
-                            <div className='d-flex justify-content-center mb-3'>
-                                <Link to="">
-                                    <Button className='btn-primary'>Enviar</Button>
-                                </Link>
-                            </div>
-                        </div>
+                </div>
 
-                    </Row>
+            </Row>
 
-                </Container>
+        </Container>
 
-            </div>
+    </div>
 }
 
 export default CadastroIMT;
