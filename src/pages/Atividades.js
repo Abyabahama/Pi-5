@@ -5,13 +5,17 @@ import Logo from '../components/Logo'
 import '../components/styles.css'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
+import { Alert } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 
 const Servico = () => {
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const success = searchParams.get('success')
+
     return <div>
                 <Container>
                     <Row>
@@ -19,6 +23,9 @@ const Servico = () => {
                     </Row>
                 </Container>
                 <Container>
+                    {success && (
+                        <Alert variant='success'>Cadastro realizado com sucesso!</Alert>
+                    )}
                     <Row className='justify-content-center'>
                         <div className='bg-white rounded mt-4 pt-3 mb-1 col-10'>
                             <h3 className='justify-content-center d-flex mb-4 font-weight-bold'>Selecione qual serviço deseja acessar.</h3>

@@ -4,6 +4,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import axios from 'axios';
 
 const FormularioRPA = () => {
     const [nome, setNome] = useState('')
@@ -26,7 +27,7 @@ const FormularioRPA = () => {
     const [portfolio, setPortfolio] = useState('')
     const [linkedin, setLinkedin] = useState('')
 
-    const handleSubmit = (event) => {
+    const handleSubmit =async (event) => {
         event.preventDefault();
         const dados = {
             "nome": nome,
@@ -34,22 +35,50 @@ const FormularioRPA = () => {
             "RG": rg,
             "CPF": cpf,
             "nacionalidade": nacionalidade,
-            "unidade federativa": uf,
+            "UF": uf,
             "cidade": cidade,
             "logradouro" : logradouro,
-            "endereço": endereco,
+            "endereco": endereco,
             "complemento": complemento,
             "bairro": bairro,
             "telefone": telefone,
-            "estado civil": estCivil,
-            "profissâo": profissao,
+            "estCivil": estCivil,
+            "profissao": profissao,
             "curriculo": curriculo,
-            "url": url,
+            "URL": url,
             "lattes": lattes,
             "portfolio": portfolio,
             "linkedin": linkedin
         }
-        console.log(dados)
+        const response = await axios.post('http://localhost:4000/aplicador/rpa/cadastro', dados)
+        .then((response) => {
+            // Success
+            console.log(response)
+            if (response.status === 201){
+                window.location.href = `/atividades/?success=true&email=${email}&RG=${rg}`
+            }
+        })
+        .catch((error) => {
+            // Error
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                // console.log(error.response.data);
+                // console.log(error.response.status);
+                // console.log(error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the 
+                // browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+            }
+            console.log(error.config);
+            window.location.href = `/cadastro/rpa/?success=false`
+        });
     }
     return (
         <div>

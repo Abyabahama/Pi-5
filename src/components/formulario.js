@@ -5,8 +5,6 @@ import Tabs from 'react-bootstrap/Tabs';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from "axios";
-import { Modal } from "react-bootstrap";
-import { Navigate } from "react-router-dom";
 
 
 
@@ -38,9 +36,7 @@ const Formulario = () => {
     const [emailResp, setEmailResp] = useState('')
     const [cpfResp, setCpfResp] = useState('')
 
-    const [showModal, setShowModal] = useState(false);
-    const handleShow = () => setShowModal(true);
-    const handleClose = () => setShowModal(false);
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -73,29 +69,43 @@ const Formulario = () => {
             "CPFResponsavel": cpfResp
         }
 
-        const response = await axios.post('http://localhost:4000/aplicador/pj/cadastro', dados);
-            console.log(response.data)
-            window.location.href = '/?success=true'
+            const response = await axios.post('http://localhost:4000/aplicador/pj/cadastro', dados)
+            .then((response) => {
+                // Success
+                console.log(response)
+                if (response.status === 201){
+                    window.location.href = `/atividades/?success=true&email=${email}&RG=${rg}`
+                }
+            })
+            .catch((error) => {
+                // Error
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    // console.log(error.response.data);
+                    // console.log(error.response.status);
+                    // console.log(error.response.headers);
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the 
+                    // browser and an instance of
+                    // http.ClientRequest in node.js
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                }
+                console.log(error.config);
+                window.location.href = `/cadastro/cnpj/?success=false`
+            });
+            
+         
+            
         }
     
-
+    
     return (
         <div>
-            <div className="modal">
-                <Modal.Dialog visible={showModal}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Modal title</Modal.Title>
-                    </Modal.Header>
-
-                    <Modal.Body>
-                        <p>Modal body text goes here.</p>
-                    </Modal.Body>
-
-                    <Modal.Footer>
-                        <Button variant="Primary" onClick={handleClose}>Voltar</Button>
-                    </Modal.Footer>
-                </Modal.Dialog>
-            </div>
             <Form onSubmit={handleSubmit}>
                 <Tabs defaultActiveKey="Pessoal" id="uncontrolled-tab-example" className="mb-3">
                     <Tab eventKey="Pessoal" title="Pessoal">
