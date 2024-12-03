@@ -6,11 +6,14 @@ import Tabs from 'react-bootstrap/Tabs';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form';
+import axios from "axios";
 
 
 const FormularioAtv = () => {
     const [nome,
         setNome] = useState('');
+    const [emailAplicador,
+        setEmailAplicador] = useState('')
     const [rg,
         setRG] = useState('');
     const [tipoAplicador,
@@ -61,34 +64,82 @@ const FormularioAtv = () => {
         setDia2] = useState('');
     const [hora2,
         setHora2] = useState('');
+    var aplicadorRPA = ""
+    var aplicadorPJ = ""
+    var aplicadorMaua_Email = ""
+    var aplicadorMaua_RG = ""
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+        if (tipoAplicador === "Contratado do IMT"){
+            aplicadorMaua_RG = rg;
+            aplicadorMaua_Email = emailAplicador;
+            aplicadorRPA = null;
+            aplicadorPJ = null;
+        } else if (tipoAplicador === "Aplicador PJ/MEI"){
+            aplicadorPJ = rg;
+            aplicadorMaua_RG = null;
+            aplicadorMaua_Email = null;
+            aplicadorRPA = null;
+        } else if (tipoAplicador === "Aplicador RPA"){
+            aplicadorRPA = rg;
+            aplicadorPJ = null;
+            aplicadorMaua_Email = null;
+            aplicadorMaua_RG = null;
+        }
         const dados = {
             "nome": nome,
-            "rg do aplicador": rg,
-            "nome do coordenador": nomeResp,
-            "descricao": descricao,
+            "coordenador": nomeResp,
             "categoria": categoria,
-            "publico alvo": publico,
+            "publicoAlvo": publico,
+            "descricao": descricao,
+            "topicos": topicos,
             "objetivos": objetivos,
             "metodologia": metodologia,
-            "topicos": topicos,
             "desafios": desafios,
-            "tamanho da sala": sala,
-            "participacao da comunidade": partCom,
-            "materiais": materiais,
-            "competencia tecnica 1": competenciaTec1,
-            "competencia tecnica 2": competenciaTec2,
-            "competencia transversal 1": competenciaTra1,
-            "competencia transversal 2": competenciaTra2,
-            "video ilustrativo": video,
-            "primeira opcao de dia": dia1,
-            "primeira opcao de hora": hora1,
-            "segunda opcao de dia": dia2,
-            "segunda opcao de hora": hora2
+            "recursos": materiais,
+            "competenciasTecnicas": `${competenciaTec1}, ${competenciaTec2}`,
+            "competenciasTransversais": `${competenciaTra1}, ${competenciaTra2}`,
+            "sala": sala,
+            "partComunidade": partCom,
+            "status": "aguardando",
+            "horario": `${dia1}, ${hora1} ou ${dia2}, ${hora2}`,
+            "video": video,
+            "aplicadorRPA": aplicadorRPA,
+            "aplicadorPJ": aplicadorPJ,
+            "aplicadorMaua_Email": aplicadorMaua_Email,
+            "aplicadorMaua_RG": aplicadorMaua_RG
+
         }
-        console.log(dados)
+        const response = await axios.post('http://localhost:4000/atividade/cadastro', dados)
+        .then((response) => {
+            // Success
+            console.log(response)
+            if (response.status === 201){
+                window.location.href = `/atividades/?cadastrado=true`
+            }
+        })
+        .catch((error) => {
+            // Error
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                // console.log(error.response.data);
+                // console.log(error.response.status);
+                // console.log(error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the 
+                // browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+            }
+            console.log(error.config);
+            window.location.href = `/atividades/cadastro/?success=false`
+        });
     }
 
     const onChangeSala = (e) => {
@@ -130,6 +181,14 @@ const FormularioAtv = () => {
                                 name="rg"
                                 value={rg}
                                 onChange={(e) => setRG(e.target.value)}></Form.Control>
+                        </Form.Group>
+                        <Form.Group className='mb-1 mt-3' controlId='nome.ControlInput'>
+                            <Form.Label>E-mail do aplicador</Form.Label>
+                            <Form.Control
+                                type='text'
+                                name="emailAplicador"
+                                value={emailAplicador}
+                                onChange={(e) => setEmailAplicador(e.target.value)}></Form.Control>
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Forma de cadastro do aplicador</Form.Label>
