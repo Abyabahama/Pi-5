@@ -65,8 +65,28 @@ const FormularioAtv = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const dados = {
-            "sala": sala,
-            "participacao": partCom
+            "nome": nome,
+            "rg do aplicador": rg,
+            "nome do coordenador": nomeResp,
+            "descricao": descricao,
+            "categoria": categoria,
+            "publico alvo": publico,
+            "objetivos": objetivos,
+            "metodologia": metodologia,
+            "topicos": topicos,
+            "desafios": desafios,
+            "tamanho da sala": sala,
+            "participacao da comunidade": partCom,
+            "materiais": materiais,
+            "competencia tecnica 1": competenciaTec1,
+            "competencia tecnica 2": competenciaTec2,
+            "competencia transversal 1": competenciaTra1,
+            "competencia transversal 2": competenciaTra2,
+            "video ilustrativo": video,
+            "primeira opcao de dia": dia1,
+            "primeira opcao de hora": hora1,
+            "segunda opcao de dia": dia2,
+            "segunda opcao de hora": hora2
         }
         console.log(dados)
     }
@@ -78,16 +98,16 @@ const FormularioAtv = () => {
         setPartCom(e.target.value);
     }
     const onChangeDia1 = (e) => {
-        setPartCom(e.target.value);
+        setDia1(e.target.value);
     }
     const onChangeHorario1 = (e) => {
-        setPartCom(e.target.value);
+        setHora1(e.target.value);
     }
     const onChangeDia2 = (e) => {
-        setPartCom(e.target.value);
+        setDia2(e.target.value);
     }
     const onChangeHorario2 = (e) => {
-        setPartCom(e.target.value);
+        setHora2(e.target.value);
     }
     return (
         <div>

@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import axios from "axios";
+import { Modal } from "react-bootstrap";
+import { Navigate } from "react-router-dom";
 
 
 
@@ -27,14 +30,19 @@ const Formulario = () => {
     const [lattes, setLattes] = useState('')
     const [portfolio, setPortfolio] = useState('')
     const [linkedin, setLinkedin] = useState('')
+    const [valor, setValor] = useState('')
     const [empresa, setEmpresa] = useState('')
     const [cnpj, setCNPJ] = useState('')
     const [cnae, setCNAE] = useState('')
     const [nomeResp, setNomeResp] = useState('')
     const [emailResp, setEmailResp] = useState('')
     const [cpfResp, setCpfResp] = useState('')
-    
-    const handleSubmit = (event) => {
+
+    const [showModal, setShowModal] = useState(false);
+    const handleShow = () => setShowModal(true);
+    const handleClose = () => setShowModal(false);
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const dados = {
             "nome": nome,
@@ -42,31 +50,52 @@ const Formulario = () => {
             "RG": rg,
             "CPF": cpf,
             "nacionalidade": nacionalidade,
-            "unidade federativa": uf,
+            "UF": uf,
             "cidade": cidade,
             "logradouro" : logradouro,
-            "endereço": endereco,
+            "endereco": endereco,
             "complemento": complemento,
             "bairro": bairro,
             "telefone": telefone,
-            "estado civil": estCivil,
-            "profissâo": profissao,
+            "estCivil": estCivil,
+            "profissao": profissao,
             "curriculo": curriculo,
-            "url": url,
+            "URL": url,
             "lattes": lattes,
             "portfolio": portfolio,
             "linkedin": linkedin,
+            "valor": valor,
             "empresa": empresa,
-            "cnpj da empresa": cnpj,
-            "cnae da empresa": cnae,
-            "nome do responsavel pelo contrato": nomeResp,
-            "email do responsavel pelo contrato": emailResp,
-            "cpf do responsavel pelo contrato": cpfResp
+            "CNPJ": cnpj,
+            "CNAE": cnae,
+            "nomeResponsavel": nomeResp,
+            "emailResponsavel": emailResp,
+            "CPFResponsavel": cpfResp
         }
-        console.log(dados)
-    }
+
+        const response = await axios.post('http://localhost:4000/aplicador/pj/cadastro', dados);
+            console.log(response.data)
+            window.location.href = '/?success=true'
+        }
+    
+
     return (
         <div>
+            <div className="modal">
+                <Modal.Dialog visible={showModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Modal title</Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <p>Modal body text goes here.</p>
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <Button variant="Primary" onClick={handleClose}>Voltar</Button>
+                    </Modal.Footer>
+                </Modal.Dialog>
+            </div>
             <Form onSubmit={handleSubmit}>
                 <Tabs defaultActiveKey="Pessoal" id="uncontrolled-tab-example" className="mb-3">
                     <Tab eventKey="Pessoal" title="Pessoal">
@@ -162,6 +191,11 @@ const Formulario = () => {
                             <Form.Label>Linkedin</Form.Label>
                             <Form.Control type='text' name="linkedin" value={linkedin} onChange={(e) => setLinkedin(e.target.value)}></Form.Control>
                         </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Valor do pagamento</Form.Label>
+                            <Form.Control type="text" name="valor" value={valor} onChange={(e) => setValor(e.target.value)}></Form.Control>
+                        </Form.Group>
+
                     </Tab>
                     <Tab eventKey="Empresarial" title="Empresarial">
                         <Form.Group className='mb-1' controlId='nomeEmp.ControlInput'>
