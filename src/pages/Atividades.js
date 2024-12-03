@@ -15,6 +15,8 @@ const Servico = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const success = searchParams.get('success')
+    const email = searchParams.get('email')
+    const rg = searchParams.get('RG')
 
     return <div>
                 <Container>
@@ -35,7 +37,7 @@ const Servico = () => {
                                         <Button className='col-12 col-md-8 col-lg-5 font-weight-bold'>Cadastrar uma nova atividade</Button>
                                     </div>
                                 </Link>
-                                <Link to="/atividades/consulta" className='text-decoration-none'>
+                                <Link to={`/atividades/consulta/?email=${email}&RG=${rg}`} className='text-decoration-none'>
                                     <div className='d-flex justify-content-center mb-3'>
                                         <Button className='col-12 col-md-8 col-lg-5 font-weight-bold'>Consultar status de atividade</Button>
                                     </div>

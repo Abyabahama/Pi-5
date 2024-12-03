@@ -116,7 +116,7 @@ const FormularioAtv = () => {
             // Success
             console.log(response)
             if (response.status === 201){
-                window.location.href = `/atividades/?cadastrado=true`
+                window.location.href = `/atividades/?success=true&email=${emailAplicador}&RG=${rg}`
             }
         })
         .catch((error) => {

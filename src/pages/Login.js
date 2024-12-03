@@ -8,11 +8,14 @@ import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 
 
 
 const Login = () => {
+    const [email, setEmail] = useState('')
+    const [rg, setRG] = useState('')
     return <div>
                 <Container>
                     <Row>
@@ -27,15 +30,15 @@ const Login = () => {
                                 <Form>
                                     <Form.Group className='mb-1' controlId='login.ControlInput'>
                                         <Form.Label>Endereço de E-mail</Form.Label>
-                                        <Form.Control type='email'></Form.Control>
+                                        <Form.Control type='email' value={email} onChange={(e) => setEmail(e.target.value)}></Form.Control>
                                     </Form.Group>
                                     <Form.Group className='mb-3' controlId='senha.ControlInput'>
                                         <Form.Label>R.G</Form.Label>
-                                        <Form.Control type='rg'></Form.Control>
+                                        <Form.Control type='rg' value={rg} onChange={(e) => setRG(e.target.value)}></Form.Control>
                                     </Form.Group>
                                 </Form>
                                 <div className='d-flex justify-content-center mb-3'>
-                                    <Link to="/atividades" className='text-decoration-none'>
+                                    <Link to={`/atividades/?email=${email}&RG=${rg}`} className='text-decoration-none'>
                                         <Button className='btn-primary'>Login</Button>
                                     </Link>
                                 </div>
