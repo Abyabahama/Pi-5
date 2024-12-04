@@ -8,6 +8,8 @@ import CadastroRPA from "./pages/CadastroRPA";
 import Servico from "./pages/Atividades";
 import CadastroAtv from "./pages/cadastroAtv";
 import ConsultaAtv from "./pages/ConsultaAtv";
+import Coordenador from "./pages/Coordenador";
+import Aprovar from "./pages/Aprovar";
 
 const Main = () => {
     return(
@@ -20,6 +22,8 @@ const Main = () => {
             <Route exact path="/atividades" Component={Servico}></Route>
             <Route exact path="/atividades/cadastro" Component={CadastroAtv}></Route>
             <Route exact path="/atividades/consulta" Component={ConsultaAtv}></Route>
+            <Route exact path="/coordenadores" Component={Coordenador}></Route>
+            <Route exact path="/coordenadores/aprovar" Component={Aprovar}></Route>
         </Routes>
     )
 }
